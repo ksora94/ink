@@ -32,7 +32,7 @@ rtr.start(Vue.extend({
         return {
             setting: {},
             collect: {},
-            night: false
+            night: "init"
         }
     },
     methods: {
@@ -61,10 +61,12 @@ rtr.start(Vue.extend({
         this.night = night.get();
     },
     watch:{
-        "night":function (n) {
+        "night":function (n,old) {
             var body = document.body.classList;
             n ? body.add("bak-black") : body.remove("bak-black");
-            night.set();
+            if(old != "init"){
+                night.set();
+            }
         }
     }
 }), "body");
